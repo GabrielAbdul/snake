@@ -5,6 +5,8 @@
 // Graphics
 #include <SDL2/SDL.h>
 
+//#define WINDOWED
+
 struct snake_s
 {
     int pos;
