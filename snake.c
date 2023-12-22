@@ -20,7 +20,49 @@
 #define GREEN 0xff
 #define ALPHA 255
 
-int main()
+
+/**
+ * game_loop - game loop that detects and responds to
+ *             inputs. Exits when "ESCAPE" key pressed.
+ */
+void game_loop()
+{
+    bool quit = false;
+    SDL_Event event;
+
+    while (!quit)
+    {
+        while (SDL_PollEvent(&event))
+        {
+               switch(event.type)
+               {
+                   case SDL_QUIT:
+                       quit = true;
+                       break;
+                   case SDL_KEYUP:
+                        break;
+                   case SDL_KEYDOWN:
+                        switch(event.key.keysym.sym)
+                        {
+                            case SDLK_ESCAPE:
+                                quit = true;
+                                break;
+                        };
+                        break;
+               }
+        }
+    }
+}
+
+
+/**
+ * main - Entry point of program. Responsible for
+ *        initialization of window and renderer objects,
+ *        game loop, and cleanup of initialized objects.
+ *
+ * return: 0
+ */
+int main(void)
 {
 
     // Declare Window and Reder Objects
@@ -59,7 +101,9 @@ int main()
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(2000);
+
+    // Initialize Game Loop
+    game_loop();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -67,3 +111,4 @@ int main()
 
     return 0;
 }
+
